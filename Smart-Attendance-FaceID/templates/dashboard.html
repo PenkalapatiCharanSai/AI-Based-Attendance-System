@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<!-- Stats Section -->
+<div class="row text-center mb-4">
+    <div class="col-md-4">
+        <div class="card shadow p-3">
+            <h5>Total Students</h5>
+            <h3>{{ stats.total_students }}</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow p-3">
+            <h5>Present Today</h5>
+            <h3 class="text-success">{{ stats.present_today }}</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow p-3">
+            <h5>Absent Today</h5>
+            <h3 class="text-danger">{{ stats.absent_today }}</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Export Section -->
+<div class="card shadow mb-4">
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Export Attendance</h5>
+    </div>
+    <div class="card-body">
+        <a href="{{ url_for('dashboard.export_all') }}" class="btn btn-primary me-2">Export All Records</a>
+        
+        <form method="POST" action="{{ url_for('dashboard.export_by_date') }}" class="d-inline">
+            <input type="date" name="date" required>
+            <button type="submit" class="btn btn-secondary">Export by Date</button>
+        </form>
+    </div>
+</div>
+
+<!-- Attendance Records -->
+<div class="card shadow mb-4">
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Today's Attendance ({{ attendance_today|length }})</h5>
+    </div>
+    <div class="card-body table-responsive">
+        {% if attendance_today %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Department</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in attendance_today %}
+                <tr>
+                    <td>{{ record.student_id }}</td>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.year }}</td>
+                    <td>{{ record.department }}</td>
+                    <td>{{ record.date }}</td>
+                    <td>{{ record.time }}</td>
+                    <td>
+                        <span class="badge bg-success">{{ record.status }}</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-muted">No attendance records found for today.</p>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

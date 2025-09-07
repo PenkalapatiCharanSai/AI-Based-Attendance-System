@@ -1,0 +1,6 @@
+flask
+pymongo
+opencv-python
+face-recognition
+werkzeug
+pandas

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg p-4">
+            <h3 class="text-center mb-4">Register New Student</h3>
+            <form method="POST" action="{{ url_for('attendance.register_student') }}">
+                <div class="mb-3">
+                    <label for="student_id" class="form-label">Student ID</label>
+                    <input type="text" name="student_id" id="student_id" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" name="name" id="name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="year" class="form-label">Year</label>
+                    <select name="year" id="year" class="form-select" required>
+                        <option value="" disabled selected>Select Year</option>
+                        <option value="1st">1st Year</option>
+                        <option value="2nd">2nd Year</option>
+                        <option value="3rd">3rd Year</option>
+                        <option value="4th">4th Year</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="department" class="form-label">Department</label>
+                    <input type="text" name="department" id="department" class="form-control" required>
+                </div>
+
+                <p class="text-muted mb-3">
+                    After submitting, your webcam will open to capture the student's face.
+                </p>
+
+                <button type="submit" class="btn btn-success w-100">Register & Capture Face</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg p-4 text-center">
+            <h3 class="mb-4">Take Attendance</h3>
+            <p class="mb-3">
+                Make sure your webcam is connected.<br>
+                The system will detect and recognize students’ faces in real-time.
+            </p>
+            <p class="text-muted mb-4">
+                Press <strong>q</strong> to stop the attendance session.
+            </p>
+            <a href="{{ url_for('attendance.take_attendance') }}" class="btn btn-primary btn-lg">Start Attendance</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
